@@ -19,6 +19,7 @@ __all__ = [
     'ExportToExcelView',
     'TeacherEditView',
     'TopicsView',
+    'ResetStatsView',
     'TopicedTeachersView'
 ]
 
@@ -118,3 +119,20 @@ class TopicedTeachersView(ListAPIView):
     queryset = TeacherUsersStats.objects.prefetch_related('topics').all()
     permission_classes = [AllowAny]
     serializer_class = TopicedTeachersSerializer
+
+
+class ResetStatsView(APIView):
+    permission_classes=[AllowAny]
+    def get(self, request):
+        teachers = TeacherUsersStats.objects.all()
+
+        for teacher in teachers:
+            for month in range(1, 7):
+                setattr(teacher, f"m{month}_juda_yaxshi", 0)
+                setattr(teacher, f"m{month}_yaxshi", 0)
+                setattr(teacher, f"m{month}_ortacha", 0)
+                setattr(teacher, f"m{month}_past", 0)
+                setattr(teacher, f"m{month}_yomon", 0)
+            teacher.save()
+
+        return Response({"detail": "Barcha statistikalar 0 qilindi."}, status=status.HTTP_200_OK)

@@ -7,5 +7,5 @@ urlpatterns = [
     path('get-excel/', ExportToExcelView.as_view(), name='get-excel'),
     path('topics/', TopicsView.as_view(), name='topics'),
     path('teachers/', TopicedTeachersView.as_view(), name='teachers-list'),
-
+    path('reset-stats/', ResetStatsView.as_view(), name='reset-stats'),
 ]
