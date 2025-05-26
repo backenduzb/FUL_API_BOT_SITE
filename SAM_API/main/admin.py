@@ -8,10 +8,10 @@ admin.site.unregister(Group)
 
 class UserAdmin(admin.ModelAdmin):
     list_display = (
-        'full_name', 'updated_at', 'get_topics', 
+        'full_name', 'updated_at', 'get_topics','telegram_id' 
         
     )
-    list_filter = ('full_name', CustomUpdatedAtFilter, 'topics')
+    list_filter = ('full_name', CustomUpdatedAtFilter, 'topics','telegram_id')
 
     change_list_template = 'teacherusersstats_change_list.html'
 

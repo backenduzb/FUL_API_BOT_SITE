@@ -38,7 +38,7 @@ async def cmd_start(message: Message, state: FSMContext):
             remaining_time = 80 - (datetime.now() - last_vote).seconds // 60
             await message.answer(
                 f"Siz {remaining_time} daqiqadan keyin qayta ovoz bera olasiz",
-                reply_markup=types.ReplyKeyboardRemove()
+                reply_markup=reply_kb
             )
             return
     
@@ -185,7 +185,7 @@ async def process_answer(message: Message, state: FSMContext):
             f"Ustoz: {teacher_name}\n\n"
             f"Javoblar:\n{answers_text}</b>",
             parse_mode="html",
-            reply_markup=reply_kb
+            reply_markup=reply_kb_5
         )
         
         if teacher_telegram_id:
